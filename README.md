@@ -20,7 +20,7 @@ Create this directory structure for the project:
 
     ├── **`active_context.md`**
 
-    ├── **`tasks_plan.md`**
+    └── **`tasks_plan.md`**
 3. **`src/`**
 4. **`test/`**
 5. **`utils/`**
