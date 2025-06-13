@@ -10,8 +10,6 @@ Create this directory structure for the project:
 
 1. **`docs/`**
 
-    ├── **`literature/`**
-
     ├── **`architecture.md`**
 
     ├── **`technical.md`**
@@ -19,8 +17,6 @@ Create this directory structure for the project:
     └── **`product_requirement_docs.md`**
 
 2. **`tasks/`**
-
-    ├── **`rfc/`**
 
     ├── **`active_context.md`**
 
