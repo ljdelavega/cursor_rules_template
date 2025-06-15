@@ -10,9 +10,7 @@ Create this directory structure for the project:
 
 1. **`docs/`**
 
-    ├── **`architecture.md`**
-
-    ├── **`technical.md`**
+    ├── **`architecture_docs.md`**
 
     └── **`product_requirement_docs.md`**
 
@@ -29,7 +27,7 @@ Create this directory structure for the project:
 
 • <code>.cursor/rules/</code> – Custom rules for Cursor  
 • <code>docs/</code> – Project documentation, architecture, and reference materials  
-• <code>tasks/</code> – Task plans, active context, RFCs, and general to-do items  
+• <code>tasks/</code> – Task plans, active context, and general to-do items  
 • <code>src/</code> – Main source code  
 • <code>test/</code> – Testing suite  
 • <code>utils/</code> – Utility scripts or libraries  
@@ -52,9 +50,8 @@ These files define the AI's behavior and workflows.
 ### 2. Project Documentation as Memory (`docs/` & `tasks/`)
 The AI uses these files as its primary source of truth for the project's goals, status, and technical details.
 
-*   **`docs/product_requirement_docs.md`**: The Product Requirement Document (PRD). Defines the project's purpose, features, and scope.
-*   **`docs/architecture.md`**: The System Architecture Document. Outlines the system's design, components, data flow, and technology stack.
-*   **`docs/technical.md`**: The Technical Specifications. Details the development environment, libraries, coding conventions, and technical constraints.
+*   **`docs/architecture_docs.md`**: The System Architecture and Technical Specifications Document. Outlines the system's design, components, data flow, technology stack, development environment, coding conventions, and technical constraints.
+*   **`docs/product_requirement_docs.md`**: The Product Requirements Document (PRD). Describes the product's purpose, features, users, and overall functionality.
 *   **`tasks/tasks_plan.md`**: The task backlog and project progress tracker.
 *   **`tasks/active_context.md`**: Captures the immediate focus of development, recent decisions, and next steps.
 

@@ -13,35 +13,20 @@ This outlines the fundamental principles, required files, workflow structure, an
 The Memory Files consist of required core files and optional context files. Files build upon each other in a clear hierarchy:
 ```mermaid
 flowchart TD
-    PB[ [product_requirement_docs.md](mdc:ljdelavega-website/docs/product_requirement_docs.md) ] --> PC[ [technical.md](mdc:ljdelavega-website/docs/technical.md) ]
-    PB --> SP[ [architecture.md](mdc:ljdelavega-website/docs/architecture.md) ]
-
-    SP --> TC[ [tasks_plan.md](mdc:ljdelavega-website/tasks/tasks_plan.md) ]
-    PC --> TC
+    PB["[product_requirement_docs.md](docs/product_requirement_docs.md)"] --> SP["[architecture_docs.md](docs/architecture_docs.md)"]
+    
+    SP --> TC["[tasks_plan.md](tasks/tasks_plan.md)"]
     PB --> TC
     
-    TC --> AC[ [active_context.md](mdc:ljdelavega-website/tasks/active_context.md) ]
+    TC --> AC["[active_context.md](tasks/active_context.md)"]
 
-    AC --> ER[ [error-documentation.mdc](mdc:ljdelavega-website/.cursor/rules/error-documentation.mdc)]
-    AC --> LL[ [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc) ]
+    AC --> ER["[error-documentation.mdc](.cursor/rules/error-documentation.mdc)"]
+    AC --> LL["[lessons-learned.mdc](.cursor/rules/lessons-learned.mdc)"]
     
-    subgraph LIT[ @docs/literature ]
-        L1[...]
-        L2[...]
-    end
-    
-    subgraph RFC[ @tasks/rfc/ ]
-        R1[...]
-        R2[...]
-    end
-    
-    PC --o LIT
-    TC --o RFC
-
 ```
 ## Core Files (Required)
-  7 files: 
-  1. [product_requirement_docs.md](mdc:ljdelavega-website/docs/product_requirement_docs.md) (docs/product_requirement_docs.md): Product Requirement Document (PRD) for the project or a Standard Operating Procedure (SOP). 
+  6 files: 
+  1. [product_requirement_docs.md](docs/product_requirement_docs.md): Product Requirement Document (PRD) for the project details. 
   - Why this project exists
   - Problems it solves
   - Defines core requirements and goals
@@ -49,51 +34,38 @@ flowchart TD
   - Source of truth for project scope
   - Created at project start if it doesn't exist
 
-  2. [architecture.md](mdc:ljdelavega-website/docs/architecture.md) (docs/architecture.md): System architecture
+  2. [architecture_docs.md](docs/architecture_docs.md): System architecture & technical specifications
   - How it should work
   - Component relationships
   - Dependencies
   - Workflow of the solution
   - Mermaid diagram of the solution overview: each component and the code flow.
-
-  3. [technical.md](mdc:ljdelavega-website/docs/technical.md) (docs/technical.md): Development environment and stack
   - Technologies used
   - Development setup
   - Key technical decisions
   - Design patterns in use
   - Technical constraints
 
-  4. [tasks_plan.md](mdc:ljdelavega-website/tasks/tasks_plan.md) (tasks/tasks_plan.md): Detailed Task backlog
+  3. [tasks_plan.md](tasks/tasks_plan.md): Detailed Task backlog
   - In-depth list of tasks and project progress
   - What works
   - What's left to build
   - Current status
   - Known issues
   
-  5. [active_context.md](mdc:ljdelavega-website/tasks/active_context.md) (tasks/active_context.md): Current state of development
+  4. [active_context.md](tasks/active_context.md): Current state of development
   - Current work focus
   - Active decisions and considerations
   - Recent changes
   - Next steps
 
-  6. [error-documentation.mdc](mdc:ljdelavega-website/.cursor/rules/error-documentation.mdc) (.cursor/rules/error-documentation.mdc): 
+  5. [error-documentation.mdc](.cursor/rules/error-documentation.mdc): 
   - During your interaction, if you find a reusable fix for a mistake in this project or a correction you received, you should take note of it in the error-documentation.mdc file so you will not make the same mistake again.
   - Known issues: their state, context, and resolution
 
-  7. [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc) (.cursor/rules/lessons-learned.mdc): A learning journal for each project.
+  6. [lessons-learned.mdc](.cursor/rules/lessons-learned.mdc): A learning journal for each project.
   - It captures important patterns, preferences, and project intelligence.
   - It is detailed in lessons-learned.mdc.
-
-## Context Files (Optional)
-Detailed documentation. Retrieve on demand when needed for context.
-
-1. docs/literature/ :
-  - Literature surveys and research are in this directory.
-  - Each literature topic is a LaTeX file (docs/literature/*.tex).
-
-2. tasks/rfc/ :
-  - Contains RFCs for each individual task in tasks_plan.md.
-  - RFCs will be in LaTeX file format (tasks/*.tex).
 
 ## Additional Context
 Create additional files or folders as Memory files in docs/ or tasks/ when they help organize:
@@ -110,7 +82,7 @@ The system operates in distinct MODES: (PLAN/ACT) or analogously (Architect/Code
 ## PLAN or Architect MODE
 ```mermaid
 flowchart TD
-    Start[Start] --> ReadFiles[Read Memory Files ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md". if needed further: "docs/literature" and "tasks/rfc") ]
+    Start[Start] --> ReadFiles["Read Core Memory Files"]
     ReadFiles --> CheckFiles{Files Complete?}
     
     CheckFiles -->|No| Plan[Create Plan]
@@ -125,17 +97,17 @@ flowchart TD
     Verification -->|No| Clarify[Seek Clarification]
     Clarify --> Strategy[Develop Strategy]
 
-    Verification -->|Yes| DocumentMemory[Document in Memory Files ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md" if needed further: "docs/literature" and "tasks/rfc")]
+    Verification -->|Yes| DocumentMemory["Document Plan in Memory Files"]
 ```
 
 ## ACT or Code MODE
 ```mermaid
 flowchart TD
-    Start[Start] --> Context[Check Memory Files (Core Files always ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md"), rest based on context (if needed further: "docs/literature" and "tasks/rfc")) ]
+    Start[Start] --> Context["Check Memory Files"]
     Context --> Update[Update Documentation]
-    Update --> Rules[Update [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc), [error-documentation.mdc](mdc:ljdelavega-website/.cursor/rules/error-documentation.mdc) if needed]
+    Update --> Rules["Update lessons-learned & error-documentation"]
     Rules --> Execute[Execute Task]
-    Execute --> Document[Document Changes in Memory Files ("docs/": (a)"docs/architecture.md" (b)"docs/product_requirement_docs.md" (c)"docs/technical.md". "tasks/" : (a)"tasks/active_context.md" (b)"tasks/tasks_plan.md" if needed further: "docs/literature" and "tasks/rfc") ]
+    Execute --> Document["Document Changes in Memory Files"]
 ```
 
 # Documentation Updates
@@ -153,20 +125,20 @@ flowchart TD
     
     subgraph Process
         P1[Review Core Files]
-        P2[Document Current State in [active_context.md](mdc:ljdelavega-website/tasks/active_context.md) and [tasks_plan.md](mdc:ljdelavega-website/tasks/tasks_plan.md) ]
-        P3[Clarify Next Steps and document in [tasks_plan.md](mdc:ljdelavega-website/tasks/tasks_plan.md) ]
-        P4[Update [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc), [error-documentation.mdc](mdc:ljdelavega-website/.cursor/rules/error-documentation.mdc)]
-        P5 Update [ [architecture.md](mdc:ljdelavega-website/docs/architecture.md) ]
+        P2["Document State in active_context & tasks_plan"]
+        P3["Clarify Next Steps in tasks_plan"]
+        P4["Update lessons-learned & error-documentation"]
+        P5["Update architecture_docs"]
         
-        P1 --> P2 --> P3 --> P4
+        P1 --> P2 --> P3 --> P4 --> P5
     end
     
     Start --> Process
 ```
 
-Note: When triggered by **update memory files**, you MUST review every Core memory file, even if some do not require updates. Focus particularly on [active_context.md](mdc:ljdelavega-website/tasks/active_context.md) and [tasks_plan.md](mdc:ljdelavega-website/tasks/tasks_plan.md) as they track the current state. Also, architecture.md has a section for the current workflow that is also updated by any code changes.
+Note: When triggered by **update memory files**, you MUST review every Core memory file, even if some do not require updates. Focus particularly on [active_context.md](tasks/active_context.md) and [tasks_plan.md](tasks/tasks_plan.md) as they track the current state. Also, architecture_docs.md has a section for the current workflow that is also updated by any code changes.
 
-# Project Intelligence ( [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc) [.cursor/rules/lessons-learned.mdc] )
+# Project Intelligence ( [lessons-learned.mdc](.cursor/rules/lessons-learned.mdc) )
 
 The lessons-learned.mdc file is a learning journal for each project. It captures important patterns, preferences, and project intelligence that help the AI work more effectively. As the AI works with you and the project, it will discover and document key insights that are not obvious from the code alone.
 
@@ -177,11 +149,11 @@ flowchart TD
     subgraph Learn [Learning Process]
         D1[Identify Pattern]
         D2[Validate with User]
-        D3[Document in [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc) ]
+        D3["Document in lessons-learned.mdc"]
     end
     
     subgraph Apply [Usage]
-        A1[Read [lessons-learned.mdc](mdc:ljdelavega-website/.cursor/rules/lessons-learned.mdc) ]
+        A1["Read lessons-learned.mdc"]
         A2[Apply Learned Patterns]
         A3[Improve Future Work]
     end

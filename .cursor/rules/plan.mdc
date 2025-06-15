@@ -9,13 +9,13 @@ globs:
 alwaysApply: true
 ---
 Before every Plan/Architect task, ALWAYS do three things:
-a. Read the existing documentation in `docs/`: i. `docs/architecture.md`, ii. `docs/product_requirement_docs.md`, iii. `docs/technical.md`.
+a. Read the existing documentation in `docs/`: i. `docs/architecture_docs.md`, ii. `docs/product_requirement_docs.md`.
 b. Read the plans and related task planning & context in `tasks/`: i. `tasks/active_context.md`, ii. `tasks/tasks_plan.md`.
 c. Get required solution context from the code files in `src/` and other relevant directories.
 ---
-# Below is the Planning Workflow to follow:
+# Planning workflow to follow:
 
-1. UNDERSTAND the REQUIREMENTS:
+1. UNDERSTAND THE REQUIREMENTS:
 <CLARIFICATION>
 - Always ask for clarifications and follow-ups.
 - Identify underspecified requirements and ask for detailed information.
@@ -25,7 +25,7 @@ c. Get required solution context from the code files in `src/` and other relevan
 - Only after having 100% clarity and confidence, proceed to the SOLUTION.
 </CLARIFICATION>
 
-2. FORMULATING the SOLUTION:
+2. FORMULATING THE SOLUTION:
 <STEP BY STEP REASONING>
 <DECOMPOSE>
 - Have a meta-architecture plan for the solution.
@@ -34,26 +34,30 @@ c. Get required solution context from the code files in `src/` and other relevan
 a. Think about all possible ways to solve the problem.
 b. Set up the evaluation criteria and trade-offs to assess the merit of the solutions.
 c. Find the optimal solution and the criteria making it optimal, as well as the trade-offs involved.
-<WEB USE> You can use the web if needed using use_mcp_tool commands, particularly the search tool from Perplexity. Example:
-<use_mcp_tool>
-<server_name>perplexity-mcp</server_name>
-<tool_name>search</tool_name>
-<arguments>
-{
-  "param1": "value1",
-  "param2": "value2"
-}
-</arguments>
-</use_mcp_tool>
+d. Ensure solution uses proper documentation based on the project setup (imported libraries and language versions)
+    i. **Acknowledge Staleness:** Recognize that your knowledge of a library's API might not be current.
+    ii. **Prioritize External Tools:** Before generating code for any public library, you should strongly consider using an available external tool (like **Context7**) to fetch the latest, version-specific documentation.
+    ii. **Avoid Deprecated Patterns:** Never generate code that you know has been deprecated, even if it was common in your training data.
+<WEB USE> 
+You can use the web if needed to do research by using installed MCPs, such as the documentation search tool context7.
+**Available Tools:**
+- **`resolve-library-id`**: Find the correct library identifier for documentation
+- **`get-library-docs`**: Fetch up-to-date documentation for libraries
+**Usage Guidelines:**
+- Always call `resolve-library-id` first unless user provides exact library ID
+- Use for getting current documentation when local docs are outdated
+- Specify topic parameter to focus on relevant sections
+**Library docs**: Use Context7 for up-to-date documentation
+**Notify User of Usage**: Whenever you use context7 to get up-to-date documentation, say "I used context7 to get the most up-to-date docs."
 </WEB USE>
 
-<MULTI ATTEMPTS>
+<MULTIPLE ATTEMPTS>
 a. Rigorously reason about the optimality of the solution.
 b. Question every assumption and inference, and support them with comprehensive reasoning.
 c. Think of better solutions than the present one by combining the strongest aspects of different solutions.
-d. Repeat the <MULTI ATTEMPTS> process, refining and integrating different solutions into one until a strong solution is found.
+d. Repeat the <MULTIPLE ATTEMPTS> process, refining and integrating different solutions into one until a strong solution is found.
 e. You can use <WEB USE> if needed to do research.
-</MULTI ATTEMPTS>
+</MULTIPLE ATTEMPTS>
 </STEP BY STEP REASONING>
 
 3. SOLUTION VALIDATION:
@@ -61,7 +65,7 @@ e. You can use <WEB USE> if needed to do research.
 <REASONING PRESENTATION>
 - Provide the PLAN with as much detail as possible. 
 - Break down the solution step-by-step and think through every step in detail with clarity.
-- Reason about its optimality with respect to other promising solutions.
+- Compare how optimal the solution is to other promising solutions.
 - Explicitly state all your assumptions, choices, and decisions.
 - Explain trade-offs in solutions.
 - Restate my query in your own words if necessary after giving the solution.
@@ -71,12 +75,12 @@ e. You can use <WEB USE> if needed to do research.
 ---
 # Features of the Plan:
 1. The plan should be:
-a. `extendable`: Further code can be easily built on the current plan. Extending it in the future will be well-supported. Anticipate future functionalities and make the plan adaptable to them.
+a. `extendable`: Further code can be easily built on top of the current plan. Extending it in the future will be well-supported. Anticipate future functionalities and make the plan adaptable to them.
 b. `detailed`: The plan should be very detailed, taking care of every aspect that will be affected by it in every possible way.
 c. `robust`: Plan for error scenarios and failure cases, and have fallbacks for possible failure cases.   
 d. `accurate`: Every aspect should be in sync with each other, individual components should be correct, and the interfaces should be correct.   
 ---
 
 After every Plan/Architect task, ALWAYS do two things:
-a. Document the plan into existing documentation and update files in `docs/`: i. `docs/architecture.md`, ii. `docs/product_requirement_docs.md`, iii. `docs/technical.md`.
+a. Document the plan into existing documentation and update files in `docs/`: i. `docs/architecture_docs.md`, ii. `docs/product_requirement_docs.md`.
 b. Document the plans and related task planning & context in `tasks/`: i. `tasks/active_context.md`, ii. `tasks/tasks_plan.md`.
